@@ -10,5 +10,9 @@ package Main;
  * @author Sebastián Sanchez
  */
 public class Main {
+    public static void main(String[]args){
+        Aleatorio alt= new Aleatorio();
+        alt.leerDimension();
+    }
     
 }
