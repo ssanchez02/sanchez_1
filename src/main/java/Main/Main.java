@@ -12,7 +12,7 @@ package Main;
 public class Main {
     public static void main(String[]args){
         Aleatorio alt= new Aleatorio();
-        alt.leerDimension();
+        alt.menu();
     }
     
 }
