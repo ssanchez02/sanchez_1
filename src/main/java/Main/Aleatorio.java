@@ -16,6 +16,8 @@ Debe validar las entradas acorde a la especificación.
  */
 package Main;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -24,6 +26,8 @@ import java.util.Scanner;
  * @author Sebastián Sanchez
  */
 public class Aleatorio {
+
+    
 
     public int leerDimension() {
         Scanner teclado = new Scanner(System.in);
@@ -40,22 +44,23 @@ public class Aleatorio {
         return dimension;
     }
 
-    public void llenarArreglo(int arreglo[]) {
+    public void llenarArreglo(Integer arreglo[]) {
         for (int i = 0; i < arreglo.length; i++) {
             arreglo[i] = (int) ((Math.random() * 100) + 1);
         }
     }
 
-    public void mostrarArreglo(int arreglo[]) {
+    public void mostrarArreglo(Integer arreglo[]) {
         for (int i = 0; i < arreglo.length; i++) {
-            System.out.println(arreglo[i]);
+            System.out.print("[" + arreglo[i] + "]");
         }
+        System.out.println("");
     }
 
-    public void burbujaMenorMayor(int arreglo[]) {
+    public void burbujaMenorMayor(Integer arreglo[]) {
         for (int i = 0; i < arreglo.length - 1; i++) {
-            for (int j = 0; j < arreglo.length - 1; i++) {
-                if (arreglo[j] < arreglo[j + 1]) {
+            for (int j = 0; j < arreglo.length - 1; j++) {
+                if (arreglo[j + 1] < arreglo[j]) {
                     int temporal = arreglo[j + 1];
                     arreglo[j + 1] = arreglo[j];
                     arreglo[j] = temporal;
@@ -64,44 +69,51 @@ public class Aleatorio {
         }
     }
 
-    public void burbujaMayorMenor(int arreglo[]) {
+    public void burbujaMayorMenor(Integer arreglo[]) {
         for (int i = 0; i < arreglo.length - 1; i++) {
-            for (int j = 0; j < arreglo.length - 1; i++) {
+            for (int j = 0; j < arreglo.length - 1; j++) {
                 if (arreglo[j] < arreglo[j + 1]) {
-                    int temporal = arreglo[j];
-                    arreglo[j] = arreglo[j+1];
-                    arreglo[j+1] = temporal;
+                    int temporal = arreglo[j + 1];
+                    arreglo[j + 1] = arreglo[j];
+                    arreglo[j] = temporal;
                 }
             }
         }
 
     }
 
+    public Integer[] ordenarMenorMayor(Integer[] arreglo) {
+        Arrays.sort(arreglo);
+        return arreglo;
+    }
+
+    public Integer[] ordenarMayorMenor(Integer[] arreglo) {
+         Arrays.sort(arreglo,Collections.reverseOrder());
+        return arreglo;
+    }
+
     public void menu() {
-        boolean bandera = true;
-        while (bandera) {
-            Scanner teclado = new Scanner(System.in);
+                  
             System.out.println("----Bienvenidos al sistema de numeros aleatorios----");
             System.out.println("Ingresar el largo del arreglo");
-            int[] aleatorios = new int[leerDimension()];
-            System.out.println("1.-Llenar arreglo\n2.Ordenar de Menor a Mayor por método de burbuja-\n3.-Ordenar de Mayor a Menor por método de burbuja");
-            System.out.println("4.-");
-            int opcion = teclado.nextInt();
-
-            switch (opcion) {
-                case 1:
-                    llenarArreglo(aleatorios);
-                    System.out.println("Sus arreglo es: ");
-                    mostrarArreglo(aleatorios);
-                    break;
-                case 2:
-                    burbujaMenorMayor(aleatorios);
-                    break;
-                case 3:
-                    bandera = false;
-                    break;
-            }
-
-        }
+            Integer[] aleatorios = new Integer[leerDimension()];
+            llenarArreglo(aleatorios);
+            System.out.println("Sus arreglo con numeros aleatorios es: ");
+            mostrarArreglo(aleatorios);
+            System.out.println("");
+            System.out.println("Su arreglo ordenado de menor a mayor por el método de la burbuja es: ");
+            burbujaMenorMayor(aleatorios);
+            mostrarArreglo(aleatorios);
+            System.out.println("");
+            System.out.println("Su arreglo ordeando de mayor a menor por el método de la burbuja es: ");
+            burbujaMayorMenor(aleatorios);
+            mostrarArreglo(aleatorios);
+            System.out.println("");
+            System.out.println("Arreglo ordenado menor a mayor por método de Arrays");
+            mostrarArreglo(ordenarMenorMayor(aleatorios));
+            System.out.println("");
+            System.out.println("Arreglo ordenado mayor a menor por método de Arrays");
+            mostrarArreglo(ordenarMayorMenor(aleatorios));
+       
     }
 }
